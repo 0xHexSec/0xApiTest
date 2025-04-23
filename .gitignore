@@ -1,9 +1,18 @@
-# Prerequisites
-*.d
+
+# CMake build directories
+build/
+cmake-build-debug/
+cmake-build-release/
+CMakeFiles/
+
+# CMake generated files
+CMakeCache.txt
+CMakeScripts/
+CTestTestfile.cmake
+cmake_install.cmake
+Makefile
 
 # Compiled Object files
-*.slo
-*.lo
 *.o
 *.obj
 
@@ -16,13 +25,7 @@
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
 # Compiled Static libraries
-*.lai
-*.la
 *.a
 *.lib
 
@@ -30,3 +33,15 @@
 *.exe
 *.out
 *.app
+
+# Generated files
+*.ninja
+*.ninja_deps
+*.ninja_log
+
+# IDE specific files
+*.swp
+*.swo
+*.user
+*.idea/
+*.vscode/
