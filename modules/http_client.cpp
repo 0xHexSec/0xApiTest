@@ -1,8 +1,9 @@
 #include "http_client.h"
+#include <nlohmann/json.hpp>
 #include <cpr/cpr.h>
 #include <iostream>
 
-const cpr::Timeout TIMEOUT{20000}; // 20 Sekunden
+const cpr::Timeout TIMEOUT{60000}; // 60 Sekunden
 
 cpr::Header convert_headers(const std::map<std::string, std::string>& headers) {
     cpr::Header cprHeaders;
@@ -42,13 +43,18 @@ void send_request(const HttpRequest& request) {
         }
 
         std::cout << "Status Code: " << response.status_code << "\n";
-        std::cout << "Response Headers:\n";
 
-        for (const auto& [key, val] : response.header)
-        {
-            std::cout << key << ": " << val << "\n";
+        // JSON Content erkennen
+            if (const auto contentType = response.header["content-type"]; contentType.find("application/json") != std::string::npos) {
+            try {
+                auto json = nlohmann::json::parse(response.text);
+                std::cout << json.dump(4) << "\n"; // pretty print with indent=4
+            } catch (...) {
+                std::cout << "⚠️ Ungültiges JSON:\n" << response.text << "\n";
+            }
+        } else {
+            std::cout << response.text << "\n";
         }
-        std::cout << "\nBody:\n" << response.text << "\n";
     } catch (const std::exception& e){
         std::cerr << "❗ Netzwerkfehler: " << e.what() << "\n";
     }

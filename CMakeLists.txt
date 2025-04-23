@@ -24,7 +24,11 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(0xApiTest main.cpp
         modules/http_client.cpp
-        modules/http_client.h)
+        modules/http_client.h
+        modules/request_io.cpp
+        modules/request_io.h)
 
+target_compile_features(0xApiTest PRIVATE cxx_std_17)
 target_link_libraries(0xApiTest PRIVATE cpr::cpr)
 target_include_directories(0xApiTest PRIVATE ${json_SOURCE_DIR}/single_include)
+
