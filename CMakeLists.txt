@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
 project(0xApiTest)
 
+set(CMAKE_CXX_STANDARD 20)
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -8,11 +10,9 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/libcpr/cpr.git
         GIT_TAG 1.10.4
 )
-
 set(CPR_BUILD_TESTS OFF)
 FetchContent_MakeAvailable(cpr)
 
-# JSON holen
 FetchContent_Declare(
         json
         GIT_REPOSITORY https://github.com/nlohmann/json.git
@@ -20,15 +20,28 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
-add_executable(0xApiTest main.cpp
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+
+add_executable(0xApiTest
+        main.cpp
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
         modules/http_client.cpp
         modules/http_client.h
         modules/request_io.cpp
-        modules/request_io.h)
+        modules/request_io.h
+)
 
-target_compile_features(0xApiTest PRIVATE cxx_std_17)
-target_link_libraries(0xApiTest PRIVATE cpr::cpr)
-target_include_directories(0xApiTest PRIVATE ${json_SOURCE_DIR}/single_include)
+target_include_directories(0xApiTest PRIVATE
+        ${json_SOURCE_DIR}/single_include
+)
 
+target_link_libraries(0xApiTest PRIVATE
+        Qt6::Widgets
+        cpr::cpr
+)
