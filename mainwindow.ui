@@ -1,71 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>MainWindow</class>
-    <widget class="QMainWindow" name="MainWindow">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>600</width>
-                <height>700</height>
-            </rect>
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="urlLayout">
+      <item>
+       <widget class="QComboBox" name="methodBox"/>
+      </item>
+      <item>
+       <widget class="QComboBox" name="protocolBox"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="urlEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="headersTable">
+      <column>
+       <property name="text">
+        <string>Key</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Value</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="bodyEdit"/>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="buttonLayout">
+      <item>
+       <widget class="QPushButton" name="sendButton">
+        <property name="text">
+         <string>Senden</string>
         </property>
-        <widget class="QWidget" name="centralwidget">
-            <layout class="QVBoxLayout" name="verticalLayout">
-                <item>
-                    <widget class="QComboBox" name="methodBox"/>
-                </item>
-                <item>
-                    <widget class="QLineEdit" name="urlEdit"/>
-                </item>
-                <item>
-                    <widget class="QTableWidget" name="headersTable">
-                        <column>
-                            <property name="text">
-                                <string>Key</string>
-                            </property>
-                        </column>
-                        <column>
-                            <property name="text">
-                                <string>Value</string>
-                            </property>
-                        </column>
-                    </widget>
-                </item>
-                <item>
-                    <widget class="QTextEdit" name="bodyEdit"/>
-                </item>
-                <item>
-                    <layout class="QHBoxLayout" name="buttonLayout">
-                        <item>
-                            <widget class="QPushButton" name="sendButton">
-                                <property name="text">
-                                    <string>Senden</string>
-                                </property>
-                            </widget>
-                        </item>
-                        <item>
-                            <widget class="QPushButton" name="saveButton">
-                                <property name="text">
-                                    <string>Speichern</string>
-                                </property>
-                            </widget>
-                        </item>
-                        <item>
-                            <widget class="QPushButton" name="loadButton">
-                                <property name="text">
-                                    <string>Laden</string>
-                                </property>
-                            </widget>
-                        </item>
-                    </layout>
-                </item>
-                <item>
-                    <widget class="QTextEdit" name="responseView"/>
-                </item>
-            </layout>
-        </widget>
-    </widget>
-    <resources/>
-    <connections/>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="saveButton">
+        <property name="text">
+         <string>Speichern</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="loadButton">
+        <property name="text">
+         <string>Laden</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="responseView"/>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
 </ui>

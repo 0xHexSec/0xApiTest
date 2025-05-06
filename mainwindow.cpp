@@ -1,4 +1,7 @@
 #include "mainwindow.h"
+
+#include <iostream>
+
 #include "ui_mainwindow.h"
 #include "modules/request_io.h"
 
@@ -11,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     ui->methodBox->addItems({"GET", "POST", "PUT", "DELETE"});
+    ui->protocolBox->addItems({"http", "https"});
     ui->headersTable->setColumnCount(2);
     ui->headersTable->setHorizontalHeaderLabels({"Key", "Value"});
     ui->headersTable->setRowCount(3);
@@ -25,8 +29,18 @@ MainWindow::~MainWindow() {
 }
 
 HttpRequest MainWindow::buildRequestFromUI() const {
+    std::string protocol_string;
+    std::string url_string;
+
     HttpRequest req;
-    req.url = ui->urlEdit->text().toStdString();
+
+    QString secure = ui->protocolBox->currentText();
+    if (secure == "http") protocol_string = "http://";
+    else protocol_string = "https://";
+
+    const std::string address_string = ui->urlEdit->text().toStdString();
+
+    req.url = protocol_string + address_string;
     req.body = ui->bodyEdit->toPlainText().toStdString();
 
     QString method = ui->methodBox->currentText();
